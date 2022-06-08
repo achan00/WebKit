@@ -2021,6 +2021,12 @@ void RenderObject::setPaintContainmentApplies(bool paintContainmentApplies)
         ensureRareData().setPaintContainmentApplies(paintContainmentApplies);
 }
 
+void RenderObject::setLayoutContainmentApplies(bool layoutContainmentApplies)
+{
+    if (layoutContainmentApplies || hasRareData())
+        ensureRareData().setLayoutContainmentApplies(layoutContainmentApplies);
+}
+
 RenderObject::RareDataMap& RenderObject::rareDataMap()
 {
     static NeverDestroyed<RareDataMap> map;
@@ -2050,6 +2056,7 @@ RenderObject::RenderObjectRareData::RenderObjectRareData()
     , m_isRenderFragmentedFlow(false)
     , m_hasOutlineAutoAncestor(false)
     , m_paintContainmentApplies(false)
+    , m_layoutContainmentApplies(false)
 #if ENABLE(LAYER_BASED_SVG_ENGINE)
     , m_hasSVGTransform(false)
 #endif
